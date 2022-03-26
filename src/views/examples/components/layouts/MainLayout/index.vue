@@ -1,15 +1,12 @@
 <template>
-  <a-layout class="main-layout">
-    <a-layout>
-      <a-layout-sider v-if="isLeftMenuVisible" width="250">
-        <NavMenu></NavMenu>
-      </a-layout-sider>
-      <a-layout-content>
-        <slot></slot>
-      </a-layout-content>
-    </a-layout>
-    <!--<a-layout-footer>Footer</a-layout-footer>-->
-  </a-layout>
+  <div class="main-layout flex-layout">
+    <div class="left-panel" v-if="isLeftMenuVisible" style="width: 250px">
+      <NavMenu></NavMenu>
+    </div>
+    <div class="right-panel">
+      <slot></slot>
+    </div>
+  </div>
 </template>
 
 <script lang='jsx'>
@@ -47,7 +44,17 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.main-layout {
+.flex-layout {
   height: 100%;
+  background: #F6FAFF;
+
+  .left-panel, .right-panel {
+    height: 100%;
+  }
+
+  .right-panel {
+    flex: 1;
+    padding: 10px;
+  }
 }
 </style>

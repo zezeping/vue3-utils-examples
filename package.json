@@ -1,0 +1,37 @@
+{
+  "name": "vue3-utils",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "svgo": "svgo -f src/assets/images/svg-icons"
+  },
+  "dependencies": {
+    "@ant-design/icons-vue": "^6.1.0",
+    "ant-design-vue": "^2.2.8",
+    "axios": "^0.26.1",
+    "echarts": "^5.3.1",
+    "less": "^4.1.2",
+    "normalize.css": "^8.0.1",
+    "nprogress": "^0.2.0",
+    "ui-define": "^0.0.19",
+    "vue": "^3.2.25",
+    "vue-i18n": "^9.2.0-beta.33",
+    "vue-router": "^4.0.14",
+    "vuex": "^4.0.2",
+    "vuex-persistedstate": "^4.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.2.0",
+    "@vitejs/plugin-vue-jsx": "^1.3.8",
+    "autoprefixer": "^10.4.4",
+    "rollup-plugin-visualizer": "^5.6.0",
+    "sass": "^1.49.9",
+    "unplugin-icons": "^0.14.1",
+    "unplugin-vue-components": "^0.18.4",
+    "vite": "^2.8.0"
+  },
+  "main": "index.js"
+}

@@ -1,6 +1,6 @@
 <template>
   <div class="page-content m3u8-player">
-    <HlsPlayer :src="hlsSrc" @update:hlsSize="size => hlsSize = size"></HlsPlayer>
+    <HlsPlayer :src="hlsSrc" v-model:hlsSize="hlsSize"></HlsPlayer>
     <a-divider></a-divider>
     <div>hlsSize: {{ hlsSize }}</div>
     <a-divider></a-divider>

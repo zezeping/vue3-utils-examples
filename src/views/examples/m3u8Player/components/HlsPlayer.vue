@@ -3,14 +3,15 @@
 </template>
 
 <script lang='jsx'>
-import { reactive, toRefs, defineComponent, computed, onMounted, watch } from 'vue'
+import { reactive, toRefs, defineComponent, computed, onMounted, onUnmounted, watch } from 'vue'
 import Hls from 'hls.js'
 
 export default defineComponent({
   props: {
+    src: [String],
+    hlsSize: [Object],
     hlsOptions: [Object],
     videoOptions: [Object],
-    src: [String]
   },
   emits: ['update:hlsSize'],
   setup (props, ctx) {
@@ -24,6 +25,14 @@ export default defineComponent({
 
     const state = reactive({
       videoRef: null,
+      currentHlsSize: computed({
+        get() {
+          return props.hlsSize
+        },
+        set(nv) {
+          ctx.emit('update:hlsSize', nv)
+        }
+      }),
       computedVideoOptions: computed(() => {
         return {
           muted: true,
@@ -44,18 +53,25 @@ export default defineComponent({
     })
 
     onMounted(() => {
-      state.videoRef.ontimeupdate = () => {
-        ctx.emit('update:hlsSize', { videoWidth: state.videoRef.videoWidth, videoHeight: state.videoRef.videoHeight })
+      const videoRef = state.videoRef
+      videoRef.ontimeupdate = () => {
+        const size = { videoWidth: videoRef?.videoWidth, videoHeight: videoRef?.videoHeight }
+        if (state.currentHlsSize?.videoWidth !== size.videoWidth || state.currentHlsSize?.videoHeight !== size.videoHeight) {
+          state.currentHlsSize = size
+        }
       }
 
       hls.attachMedia(state.videoRef)
       watch(() => props.src, nv => {
+        videoRef.pause()
         if (nv) {
           hls.loadSource(nv)
-        } else {
-          state.videoRef.stop()
         }
       }, {immediate: true});
+    })
+
+    onUnmounted(() => {
+      hls.destroy()
     })
 
     return { ...toRefs(state) }

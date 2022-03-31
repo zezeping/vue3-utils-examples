@@ -19,7 +19,14 @@ function pathResolve() {
 }
 
 const plugins = [
-  vue(),
+  vue({
+    template:{
+      // 添加以下内容
+      compilerOptions:{
+        isCustomElement: tag => tag.startsWith('easy-player')
+      }
+    }
+  }),
   vueJsx(),
   Icons({
     compiler: 'vue3',

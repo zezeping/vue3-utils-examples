@@ -1,6 +1,7 @@
 <template>
   <div class="page-content m3u8-player">
     <HlsPlayer :src="hlsSrc" v-model:hlsSize="hlsSize"></HlsPlayer>
+    <!--<H265Player></H265Player>-->
     <a-divider></a-divider>
     <div>hlsSize: {{ hlsSize }}</div>
     <a-divider></a-divider>
@@ -9,12 +10,11 @@
 </template>
 
 <script lang='jsx'>
-import { reactive, toRefs, defineComponent } from 'vue'
-import HlsPlayer from './components/HlsPlayer'
-
+import { reactive, toRefs, defineComponent, defineAsyncComponent } from 'vue'
 export default defineComponent({
   components: {
-    HlsPlayer,
+    HlsPlayer: defineAsyncComponent(() => import('./components/HlsPlayer' )),
+    H265Player: defineAsyncComponent(() => import('./components/H265Player2')),
   },
   setup (props, ctx) {
 

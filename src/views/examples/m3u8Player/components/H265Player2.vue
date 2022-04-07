@@ -2,7 +2,7 @@
   <easy-player
       v-if="isSdkLoaded"
       ref="videoRef"
-      video-url="https://xxx.com/streamDelivery_HUZ01_85/playlist/59397c6abb167fe43171e90f35f0a9c6.m3u8"
+      video-url="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
       live="true"
       isresolution="true"
       resolutiondefault="sd"

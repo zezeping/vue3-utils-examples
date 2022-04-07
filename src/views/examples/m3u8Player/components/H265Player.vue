@@ -3,7 +3,7 @@
 </template>
 
 <script lang='jsx'>
-import { reactive, toRefs, defineComponent, onMounted } from 'vue'
+import { reactive, toRefs, defineComponent, onMounted, onUnmounted } from 'vue'
 import { loadScript } from '@/utils/libs/resourceLoader'
 const skdLoaderPromise = new Promise(async resolve => {
   await loadScript('/easyWasmPlayer/EasyWasmPlayer.js')
@@ -18,6 +18,14 @@ export default defineComponent({
     })
 
     let player = null
+    const destroyVideoPlayer = () => {
+      if (player) {
+        player.stop()
+        player.destroy()
+        player = null
+      }
+    }
+
     onMounted(async () => {
       await skdLoaderPromise
       player = new WasmPlayer(null, 'h265-player', (e) => {
@@ -25,6 +33,10 @@ export default defineComponent({
       })
       // 调用播放
       player.play(state.url, 1)
+    })
+
+    onUnmounted(() => {
+      destroyVideoPlayer()
     })
 
     return {

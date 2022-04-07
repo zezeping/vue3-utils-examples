@@ -1,7 +1,7 @@
 <template>
   <div class="page-content m3u8-player">
-    <HlsPlayer :src="hlsSrc" v-model:hlsSize="hlsSize"></HlsPlayer>
-    <!--<H265Player></H265Player>-->
+    <!--<HlsPlayer :src="hlsSrc" v-model:hlsSize="hlsSize"></HlsPlayer>-->
+    <H265Player></H265Player>
     <a-divider></a-divider>
     <div>hlsSize: {{ hlsSize }}</div>
     <a-divider></a-divider>
